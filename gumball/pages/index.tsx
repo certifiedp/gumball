@@ -2,8 +2,10 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { useAccount, useWriteContract } from "wagmi";
 
 const Home: NextPage = () => {
+  const account = useAccount();
 
   return (
     <div className={styles.container}>
@@ -13,8 +15,9 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <ConnectButton />
-
-        <h1> Connect your Wallet </h1>
+        <div className = "text-xl">
+          {account.isConnected}
+         Account ${account.address} is now Connected </div>
       </main>
     </div>
   );
