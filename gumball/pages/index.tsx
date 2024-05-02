@@ -15,9 +15,9 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <ConnectButton />
-        <div className = "text-xl">
-          {account.isConnected}
-         Account ${account.address} is now Connected </div>
+        <div className="text-xl">
+          {account.isConnected && `Account ${account.address} is now Connected`}
+        </div>
       </main>
     </div>
   );
