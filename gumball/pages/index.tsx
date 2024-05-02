@@ -54,59 +54,48 @@ const abi = [
   },
 ] as const;
 
-const contractAddress = "0x6df511640a9ed4615A4679246E561f711FABDD61" as const;
-
-const Home: NextPage = () => {
-  const account = useAccount();
-  const { writeContract } = useWriteContract();
-
-  const {
-    data: gum,
-    isError,
-    isLoading,
-  } = useReadContract({
-    address: contractAddress,
-    abi: abi,
-    functionName: "getNumberOfGumballs",
-  });
-
-  async function addGumball() {
-    await writeContract({
-      address: contractAddress,
+  const Home: NextPage = () => {
+    const account = useAccount();
+    const { writeContract } = useWriteContract();
+  
+    const { data: gum, isError, isLoading } = useReadContract({
+      address: '0x6df511640a9ed4615A4679246E561f711FABDD61',
       abi: abi,
-      functionName: "addFreshGumballs",
-      args: [1],
+      functionName: "getNumberOfGumballs",
     });
-  }
-
-  function getNumberGum() {
-    if (isLoading) return alert("Loading...");
-    if (isError) return alert("Error fetching gumballs!");
-    alert(gum);
-  }
-
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Gumball dAPP</title>
-      </Head>
-
-      <main className={styles.main}>
-        <ConnectButton />
-        {account.isConnected}
-        <Card>
-          <Button className="font-weight: 700;" onClick={() => addGumball()}>
-            {" "}
-            Add an Extra Gumball!{" "}
-          </Button>
-          <Button className="font-weight: 700;" onClick={() => getNumberGum()}>
-            {" "}
-            Show the Gumball Count{" "}
-          </Button>
-        </Card>
-      </main>
-    </div>
-  );
-};
-
-export default Home;
+  
+    async function addGumball() {
+      await writeContract({
+        address: '0x6df511640a9ed4615A4679246E561f711FABDD61',
+        abi: abi,
+        functionName: "addFreshGumballs",
+        args: [1],
+      });
+    }
+  
+    function getNumberGum() {
+      if(isLoading) return alert("Loading...");
+      if(isError) return alert("Error fetching gumballs!");
+      alert(gum);
+    }
+  
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>Gumball dAPP</title>
+        </Head>
+  
+        <main className={styles.main}>
+          <ConnectButton />
+          {account.isConnected ? "Connected" : "Not Connected"}
+          <Card>
+            <Button className="m-2" onClick={() => addGumball()}> Add Gumball! </Button>
+            <Button className="m-2" onClick={() => getNumberGum()}> Get Gumball Count </Button>
+          </Card>
+        </main>
+      </div>
+    );
+  };
+  
+  export default Home;
+  
