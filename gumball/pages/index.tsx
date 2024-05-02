@@ -2,13 +2,10 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useAccount, useWriteContract } from "wagmi";
+import { useAccount, useReadContract, useWriteContract } from "wagmi"
 import { Button } from "../@/components/ui/button";
 import { Form } from "../@/components/ui/form";
 import { Card } from "../@/components/ui/card";
-
-require('dotenv').config();
-const ethers = require('ethers');
 
 const abi = [
   {
@@ -57,20 +54,25 @@ const abi = [
   },
 ] as const;
 
+async function mainData() {
+  const { writeContract } = useWriteContract();
+  async function addGumball() {
+    await writeContract ({
+      address: '0x6df511640a9ed4615A4679246E561f711FABDD61',
+      abi: abi, 
+      functionName: "getGumball",
+      args: [],
+    });
+  }
 
-// new ethers.providers.AlchemyProvider( [ network = "homestead", [ apiKey ] ] )
-const provider = new ethers.providers.AlchemyProvider('sepolia', proces.env.TESTNET_ALCHEMY_KEY)
-
-async function main() {
-  const contract = new ethers.Contract(
-    '0x6df511640a9ed4615A4679246E561f711FABDD61',
-    abi,
-    provider
-  );
-
-  const currentContractValue = await contract.get();
-
-  console.log(currentContractValue)
+  async function getNumberGum() {
+    const { data } = useReadContract(
+      '0x6df511640a9ed4615A4679246E561f711FABDD61',
+      abi,
+      "getNumberofGumballs",
+    );
+  }
+  return alert(data);
 }
 
 
@@ -87,9 +89,8 @@ const Home: NextPage = () => {
         <ConnectButton />
         {account.isConnected}
         <Card>
-          <Button>Get Gumball!</Button>
-          <Button>Add Gumball</Button>
-          <Button> </Button>
+          <Button className = "m-2" onclick={() => addGumball()}> Add Gumball! </Button>
+          <Button className = "m-2" onclick={() => getNumberGum()}> Get Gumball </Button>
         </Card>
       </main>
     </div>
