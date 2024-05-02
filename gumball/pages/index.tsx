@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useAccount, useWriteContract } from "wagmi";
+import { Button } from "../@/components/ui/button";
 
 const Home: NextPage = () => {
   const account = useAccount();
@@ -15,9 +16,13 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <ConnectButton />
-        <div className="text-xl">
-          {account.isConnected && `Account ${account.address} is now Connected`}
-        </div>
+        {account.isConnected}
+        <Button>
+          Get Gumball!
+        </Button>
+        <>
+          Add Gumball
+        </Button>
       </main>
     </div>
   );
