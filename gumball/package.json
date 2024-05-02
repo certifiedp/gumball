@@ -10,6 +10,7 @@
     "format": "prettier --write . --cache --cache-strategy content"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "@rainbow-me/rainbowkit": "^2.0.6",
     "@tanstack/react-query": "^5.32.1",
     "class-variance-authority": "^0.7.0",

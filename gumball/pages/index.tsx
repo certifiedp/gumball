@@ -4,10 +4,11 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Gumball Application</title>
+        <title>Gumball dAPP</title>
       </Head>
 
       <main className={styles.main}>
