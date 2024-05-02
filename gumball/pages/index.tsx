@@ -6,6 +6,7 @@ import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { Button } from "../@/components/ui/button";
 import { Form } from "../@/components/ui/form";
 import { Card } from "../@/components/ui/card";
+import { Bold } from "lucide-react";
 
 const abi = [
   {
@@ -56,6 +57,18 @@ const abi = [
 
 const address = "0x6df511640a9ed4615A4679246E561f711FABDD61" as const;
 
+const buttonStyle = {
+  backgroundColor: 'white', 
+  color: 'black',           
+  fontSize: '20px',         
+  fontWeight: 'bold',      
+  margin: '10px',          
+  padding: '15px 30px',     
+  border: 'none',           
+  cursor: 'pointer', 
+  borderRadius: '12px'      
+};
+
 const Home: NextPage = () => {
   const account = useAccount();
   const { writeContract } = useWriteContract();
@@ -102,18 +115,18 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <ConnectButton />
-        {account.isConnected && <h1> Blockchain Gumball Machine</h1>}
+        {account.isConnected && <h1 style= {{color: 'yellow', fontSize: '36px', fontWeight: 'bold'}}> Blockchain Gumball Machine</h1>}
         {account.isConnected && (
           <Card>
-            <Button className="m-2" onClick={() => addGumball()}>
+            <Button style={buttonStyle} onClick={() => addGumball()}>
               {" "}
               Add One Gumball!{" "}
             </Button>
-            <Button className="m-2" onClick={() => getNumberGum()}>
+            <Button style={buttonStyle} onClick={() => getNumberGum()}>
               {" "}
               Get Gumball Count{" "}
             </Button>
-            <Button className="m-2" onClick={() => removeGumball()}>
+            <Button style={buttonStyle} onClick={() => removeGumball()}>
               Remove one Gumball{" "}
             </Button>
           </Card>
