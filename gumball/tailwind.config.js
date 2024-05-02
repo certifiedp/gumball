@@ -9,6 +9,11 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontSize: {
+      sm: ['14px', '20px'],
+      base: ['16px', '24px'],
+      lg: ['20px', '28px'],
+      xl: ['400px', '200px'],
     container: {
       center: true,
       padding: "2rem",
@@ -74,4 +79,5 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+}
 }
