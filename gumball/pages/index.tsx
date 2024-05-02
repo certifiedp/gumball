@@ -75,7 +75,7 @@ const Home: NextPage = () => {
       address: address,
       abi: abi,
       functionName: "addFreshGumballs",
-      args: [1],
+      args: [BigInt(1)],
     });
   }
 
